@@ -166,6 +166,7 @@ class MainWindow(QWidget):
 ======================================================================
 """
 if __name__ == '__main__':
+    os.system("nfdump -R ../nfcapd/ > ../Temp/SipDip.txt")
     app = QApplication(sys.argv)
     window = MainWindow()
     sys.exit(app.exec_())

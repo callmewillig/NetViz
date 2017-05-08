@@ -31,7 +31,7 @@ import socket as sock
 """
 
 def getIPsStart():
-    os.system("nfdump -R ../nfcapd/ > ../Temp/SipDip.txt")
+
     #os.system("nfdump -R ../nfcapd/ > ../nfdumpout/SipDip.txt")
     with open("../Temp/SipDip.txt") as f:
         content = f.readlines()
