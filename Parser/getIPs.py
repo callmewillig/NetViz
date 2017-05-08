@@ -17,6 +17,11 @@ syscall for nfdump to create file for parsing
 /visProj/nfdumpout/SipDip.txt
 
 
+
+NEED TO ASK FOR START AND END DATES SO THAT NFDUMP CAN DO ONLY A CERTAIN TIME PERIOD.
+Dpacket 
+Skapey
+
 """
 
 import os
@@ -24,9 +29,11 @@ import socket as sock
 """
     return array of ip's within the file
 """
+
 def getIPsStart():
+    os.system("nfdump -R ../nfcapd/ > ../Temp/SipDip.txt")
     #os.system("nfdump -R ../nfcapd/ > ../nfdumpout/SipDip.txt")
-    with open("../nfdumpout/SipDip.txt") as f:
+    with open("../Temp/SipDip.txt") as f:
         content = f.readlines()
         
     del content[0]
@@ -60,13 +67,13 @@ def getIPsStart():
     ip3 = list(set(ip3))
 
     
-    ip3.sort(key=lambda s: map(int, s.split('.')))
+    ip3.sort(key=lambda s: list(map(int, s.split('.'))))
     #print(ip3)
 
     return ip3
 
 
-
+"""
 def getPorts():
     with open("../nfdumpout/SipDip.txt") as f:
         content = f.readlines()
@@ -99,7 +106,7 @@ def getPorts():
     ports = list(set(ports))
 
     
-    ports.sort(key=lambda s: map(int, s.split('.')))
+    ports.sort(key=lambda s: list(map(int, s.split('.'))))
    # print(ports)
     return ports
 
@@ -136,17 +143,6 @@ def getIPandPorts():
     unique_ips = [list(x) for x in set(tuple(x) for x in combinedip)]
     #print(unique_ips)
     return unique_ips
+"""
 
 
-
-
-
-
-
-
-
-
-#getIPsStart()
-#getPorts()
-#getIPandPorts()
-#getIPSourceDestination()
