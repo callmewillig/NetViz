@@ -22,7 +22,7 @@ import socket as sock
 """
 ================================================================
     getIPsStart():
-        return unique ip's within the SipDip.txt file
+        return unique Source ip's within the SipDip.txt file
 ================================================================
 """
 def getIPsStart():

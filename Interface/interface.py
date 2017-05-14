@@ -25,11 +25,7 @@ from threading import Thread
 
 #-----import graph/table programs----
 from tablesANDgraphs import *
-
-####To Matt: COLLECT AND APPEND ADDRESS HERE FROM PARSER####
-####There are static addresses bellow. Just Comment out####
 adr = []
-
 
 """
 -----IPWindow----
@@ -37,7 +33,7 @@ adr = []
 - Makes a second window with IP as title
 =======================================================================
 """
-global ip
+
 class IPWindow(QWidget):
     def __init__(self, address):
         super().__init__()
@@ -50,6 +46,7 @@ class IPWindow(QWidget):
         self.setFixedSize(360,110)
         self.setGeometry(265, 1, 0, 0)
         self.setWindowTitle(address)
+        
         global ip
         ip = address
         #-----Labeling-----
@@ -70,7 +67,7 @@ class IPWindow(QWidget):
         DestB.move(160,30)
         DestB.clicked[bool].connect(self.action)
 
-        ProtoB = QPushButton("Protocols Used",self)
+        ProtoB = QPushButton("Top 10 Ports Used",self)
         ProtoB.setFixedSize(140,30)
         ProtoB.move(10,70)
         ProtoB.clicked[bool].connect(self.action)
@@ -88,9 +85,10 @@ class IPWindow(QWidget):
         source = self.sender()
         if source.text() == "TCP vs UDP":
             tcpVudp(ip)
-        elif source.text() == "Protocols Used":
+        elif source.text() == "Top 10 Ports Used":
             barGraph(ip)
         elif source.text() == "Destinations":
+            setip(ip)
             self.destT = DestTable()
             self.destT.show()
         else:
@@ -122,7 +120,7 @@ class MainWindow(QWidget):
         scrollContent.setLayout(scrollLayout)
         
         #-----Make "adr" static array of addresses-----
-        sys.path.insert(0, '/home/student/Desktop/NetVizProject/Parser/')
+        sys.path.insert(0, '../Parser/')
         from getIPs import getIPsStart
 	
         global adr

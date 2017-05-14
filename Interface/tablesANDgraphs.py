@@ -4,16 +4,23 @@ from PyQt5.QtWidgets import *
 import numpy as np
 import sys
 sys.path.insert(0, '../Parser/')
-from info import tcpudp, portCount
+from info import tcpudp, portCount, source
+from interface import *
+
+def setip(addr):
+    global ip
+    ip = addr
 
 class DestTable(QWidget):
+    #global ip
     def __init__(self):
         super().__init__()
         self.table()
     
-    def table(self):
+    def table(self):    
         self.setWindowTitle("Sent To...")
-        adr = ["172.16.100.21","172.16.100.32","172.16.100.13","172.16.100.2","172.16.5.21","172.16.15.12"]
+        adr = source(ip)
+        #print(ip)
 
         #-----Create Table Object
         table = QTableWidget()

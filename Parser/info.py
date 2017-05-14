@@ -147,7 +147,7 @@ def portCount(ip):
     for item in dictionary:
        	count+= 1
         top10[item] = dictionary[item]
-        if count == 5:
+        if count == 10:
             break
     return top10
 
