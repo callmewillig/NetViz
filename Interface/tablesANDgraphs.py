@@ -13,7 +13,7 @@ class DestTable(QWidget):
     
     def table(self):
         self.setWindowTitle("Sent To...")
-        adr = ["1.1.1.1","2.2.2.2","3.3.3.3","4.4.4.4","5.5.5.5","255.255.255.255"]
+        adr = ["172.16.100.21","172.16.100.32","172.16.100.13","172.16.100.2","172.16.5.21","172.16.15.12"]
 
         #-----Create Table Object
         table = QTableWidget()
@@ -76,6 +76,6 @@ def barGraph(ip):
     ax.set_yticklabels(labels)
     ax.invert_yaxis()  # labels read top-to-bottom
     ax.set_xlabel('')
-    ax.set_title('F.B.G.M.')
+    ax.set_title('Ports Found')
 
     plt.show()

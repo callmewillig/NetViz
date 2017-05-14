@@ -149,7 +149,6 @@ def portCount(ip):
         top10[item] = dictionary[item]
         if count == 5:
             break
-    print(top10)
     return top10
 
 def tcpudp(ip):

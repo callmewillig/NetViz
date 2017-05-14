@@ -19,6 +19,7 @@ Authors
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5 import *
+import optparse
 import os
 from threading import Thread
 
@@ -46,7 +47,7 @@ class IPWindow(QWidget):
     #address-Button with address clicked
     def IPWIN(self, address):
         #-----Set up window-----
-        self.setFixedSize(460,90)
+        self.setFixedSize(360,110)
         self.setGeometry(265, 1, 0, 0)
         self.setWindowTitle(address)
         global ip
@@ -61,17 +62,17 @@ class IPWindow(QWidget):
         #-----Create Button----
         tuB = QPushButton("TCP vs UDP", self)
         tuB.setFixedSize(140,30)
-        tuB.move(10,50)
+        tuB.move(10,30)
         tuB.clicked[bool].connect(self.action)
         
         DestB = QPushButton("Destinations", self)
         DestB.setFixedSize(140,30)
-        DestB.move(160,50)
+        DestB.move(160,30)
         DestB.clicked[bool].connect(self.action)
 
         ProtoB = QPushButton("Protocols Used",self)
         ProtoB.setFixedSize(140,30)
-        ProtoB.move(310,50)
+        ProtoB.move(10,70)
         ProtoB.clicked[bool].connect(self.action)
 
         self.show()	
@@ -165,8 +166,37 @@ class MainWindow(QWidget):
 - MainWindow is executed and is also terminated when closed
 ======================================================================
 """
-if __name__ == '__main__':
-    os.system("nfdump -R ../nfcapd/ > ../Temp/SipDip.txt")
+if __name__ == "__main__":
+    parser = optparse.OptionParser(usage='''
+        -s <start_time> time window start for filtering packets
+		yyyy/MM/dd.hh:mm:ss
+        -e <end_time> time window end for filtering packets
+                yyyy/MM/dd.hh:mm:ss
+        ''')
+
+    parser.add_option('-s', '--start_time',
+                      dest='start_time', action='store', type='string')
+    parser.add_option('-e', '--end_time',
+                      dest='end_time', action='store', type='string')
+
+    (options, args) = parser.parse_args()
+
+    if not options.start_time:
+        if options.end_time:
+            sys.exit("End time given but no start time was given.\n")
+        else:
+            os.system("nfdump -R ../nfcapd/ > ../Temp/SipDip.txt")
+    else:
+        if not options.end_time:
+            thisstring = "nfdump -t " + options.start_time + " -R ../nfcapd/ > ../Temp/SipDip.txt"
+            print(thisstring)
+            os.system(thisstring)
+        else:
+            thisstring = "nfdump -t " + options.start_time + "-" + options.end_time + " -R ../nfcapd/ > ../Temp/SipDip.txt"
+            print(thisstring)
+            os.system(thisstring)
+
+
     app = QApplication(sys.argv)
     window = MainWindow()
     sys.exit(app.exec_())

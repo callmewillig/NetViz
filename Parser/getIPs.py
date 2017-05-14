@@ -9,27 +9,22 @@
 """
 
 """
-syscall for nfdump to create file for parsing
-
-./nfdump -R ./"file"  dstip
-./nfdump -R ./nfcapd/  > /nfdumpout/SipDip.txt
-/visProj/nfcapd/nfcapd.120398712894
-/visProj/nfdumpout/SipDip.txt
 
 
 
-NEED TO ASK FOR START AND END DATES SO THAT NFDUMP CAN DO ONLY A CERTAIN TIME PERIOD.
-Dpacket 
-Skapey
 
 """
 
 import os
 import socket as sock
-"""
-    return array of ip's within the file
-"""
 
+
+"""
+================================================================
+    getIPsStart():
+        return unique ip's within the SipDip.txt file
+================================================================
+"""
 def getIPsStart():
 
     #os.system("nfdump -R ../nfcapd/ > ../nfdumpout/SipDip.txt")
